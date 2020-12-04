@@ -9,19 +9,18 @@ namespace Microsoft.AspNetCore.Server.HttpSys
     internal sealed class RequestContext<TContext> : RequestContext
     {
         private readonly IHttpApplication<TContext> _application;
+        private readonly MessagePump _messagePump;
 
         public RequestContext(IHttpApplication<TContext> application, MessagePump messagePump, HttpSysListener server, uint? bufferSize, ulong requestId)
             : base(server, bufferSize, requestId)
         {
             _application = application;
-            MessagePump = messagePump;
+            _messagePump = messagePump;
         }
-
-        internal MessagePump MessagePump { get; }
 
         protected override async Task ExecuteAsync()
         {
-            var messagePump = MessagePump;
+            var messagePump = _messagePump;
             var application = _application;
 
             try
