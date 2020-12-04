@@ -119,7 +119,6 @@ namespace Microsoft.Net.Http.Headers
         /// <summary>
         /// Gets the total size of the document.
         /// </summary>
-        [NotNullIfNotNull(nameof(Length))]
         public long? Length { get; private set; }
 
         /// <summary>
